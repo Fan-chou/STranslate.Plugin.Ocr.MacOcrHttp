@@ -1,0 +1,57 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <LangVersion>preview</LangVersion>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <EnableWindowsTargeting>true</EnableWindowsTargeting>
+        <RepositoryUrl>https://github.com/Fan-chou/STranslate.Plugin.Ocr.MacOcrHttp</RepositoryUrl>
+        <ManagePackageVersionsCentrally>false</ManagePackageVersionsCentrally>
+
+        <TargetFramework>net10.0-windows</TargetFramework>
+        <UseWPF>true</UseWPF>
+        <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+        <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+        <DebugSymbols>true</DebugSymbols>
+        <DebugType>portable</DebugType>
+        <Optimize>false</Optimize>
+        <OutputPath>bin\Debug\</OutputPath>
+        <DefineConstants>DEBUG;TRACE</DefineConstants>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+        <DebugType>none</DebugType>
+        <Optimize>true</Optimize>
+        <OutputPath>bin\Release\</OutputPath>
+        <DefineConstants>TRACE</DefineConstants>
+        <EnableAutoPackage>true</EnableAutoPackage>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Compile Remove="tests\**" />
+        <None Remove="tests\**" />
+        <Page Remove="tests\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Content Include="Languages\*.*">
+            <Generator>MSBuild:Compile</Generator>
+            <SubType>Designer</SubType>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <Content Include="icon.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="plugin.json">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="STranslate.Plugin" Version="1.0.13" />
+    </ItemGroup>
+
+</Project>

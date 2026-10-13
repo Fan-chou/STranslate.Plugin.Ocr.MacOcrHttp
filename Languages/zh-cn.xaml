@@ -1,0 +1,28 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Url">服务地址</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Url_Description">mac-ocr-http 的地址，例如 http://127.0.0.1:8741 或 Mac 的局域网地址 http://&lt;Mac IP&gt;:8741</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Token">Token</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Token_Description">服务端 token 文件中的值（Bearer）</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Languages">识别语言</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Languages_Description">逗号分隔的 Vision 语言，如 zh-Hans,en-US；留空则跟随 STranslate 的 OCR 语言或使用服务端默认</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Level">识别级别</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Level_Description">accurate 更准；fast 更快但不支持中文</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Script">简繁转换</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Script_Description">留空为服务端默认；hans 繁体转简体；auto 不转换</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Layout">版面模式</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Layout_Description">rows 为默认（推荐）；document 使用 macOS 26 文档识别</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Fragments">过滤碎片</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Fragments_Description">去掉图标、边缘被截断的字和角落水印等低置信度碎片</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_BoxPoints">返回坐标</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_BoxPoints_Description">返回行坐标框，支持选区高亮和图片翻译</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Proxy">绕过系统代理</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Proxy_Description">直接连接服务，避免代理拦截局域网请求</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Timeout">超时（秒）</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Timeout_Description">单次识别的最长等待时间</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Validate_Description">先检查 /health，再用 Token 调用 /languages</sys:String>
+
+</ResourceDictionary>

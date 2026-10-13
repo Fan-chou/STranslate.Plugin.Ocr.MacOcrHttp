@@ -1,0 +1,4 @@
+{
+  "Name": "MacOcrHttp",
+  "Description": "呼叫 macOS Vision 的 mac-ocr-http 服務進行 OCR，回傳行座標，支援圖片翻譯"
+}

@@ -1,0 +1,28 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Url">サーバー URL</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Url_Description">mac-ocr-http のアドレス（例: http://127.0.0.1:8741）</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Token">トークン</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Token_Description">サーバーの token ファイルの値（Bearer）</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Languages">認識言語</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Languages_Description">カンマ区切りの Vision 言語（例: ja-JP,en-US）。空欄なら STranslate の OCR 言語に従う</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Level">認識レベル</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Level_Description">accurate は高精度、fast は高速</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Script">簡体字変換</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Script_Description">空欄はサーバー既定、hans は簡体字へ変換、auto は変換しない</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Layout">レイアウト</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Layout_Description">rows（既定）／document（macOS 26 文書認識）</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Fragments">断片を除去</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Fragments_Description">低信頼度のアイコンや端で切れた文字、透かしを除去</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_BoxPoints">座標を返す</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_BoxPoints_Description">行の座標枠を返し、範囲ハイライトと画像翻訳に対応</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Proxy">システムプロキシを使わない</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Proxy_Description">サーバーに直接接続</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Timeout">タイムアウト（秒）</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Timeout_Description">1 回の認識の最大待ち時間</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Validate_Description">/health を確認し、トークンで /languages を呼び出します</sys:String>
+
+</ResourceDictionary>

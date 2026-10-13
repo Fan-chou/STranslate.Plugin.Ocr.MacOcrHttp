@@ -1,0 +1,28 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Url">Server URL</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Url_Description">mac-ocr-http base URL, e.g. http://127.0.0.1:8741 or the Mac's LAN address http://&lt;Mac IP&gt;:8741</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Token">Token</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Token_Description">The value of the server's token file (Bearer)</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Languages">Languages</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Languages_Description">Comma-separated Vision languages, e.g. zh-Hans,en-US. Empty: follow STranslate's OCR language, else the server default</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Level">Level</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Level_Description">accurate is better; fast is quicker but has no Chinese</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Script">Script</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Script_Description">Empty: server default; hans converts Traditional to Simplified; auto leaves text as is</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Layout">Layout</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Layout_Description">rows (default, recommended); document uses the macOS 26 document recognizer</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Fragments">Drop fragments</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Fragments_Description">Remove low-confidence icons, edge-cut glyphs and corner watermarks</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_BoxPoints">Line boxes</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_BoxPoints_Description">Return line boxes for region highlighting and image translation</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Proxy">Bypass system proxy</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Proxy_Description">Connect directly so a proxy does not intercept LAN requests</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Timeout">Timeout (s)</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Timeout_Description">Maximum wait for one recognition</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Validate_Description">Checks /health, then calls /languages with the token</sys:String>
+
+</ResourceDictionary>

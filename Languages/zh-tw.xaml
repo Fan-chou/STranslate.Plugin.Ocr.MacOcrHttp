@@ -1,0 +1,28 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Url">服務位址</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Url_Description">mac-ocr-http 的位址，例如 http://127.0.0.1:8741 或 Mac 的區域網路位址</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Token">Token</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Token_Description">伺服器 token 檔案中的值（Bearer）</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Languages">辨識語言</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Languages_Description">逗號分隔的 Vision 語言，如 zh-Hant,en-US；留空則跟隨 STranslate 的 OCR 語言</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Level">辨識等級</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Level_Description">accurate 較準；fast 較快但不支援中文</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Script">簡繁轉換</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Script_Description">留空為伺服器預設；hans 轉簡體；auto 不轉換</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Layout">版面模式</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Layout_Description">rows 為預設；document 使用 macOS 26 文件辨識</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Fragments">過濾碎片</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Fragments_Description">移除圖示、邊緣被截斷的字與角落浮水印等低信心碎片</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_BoxPoints">回傳座標</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_BoxPoints_Description">回傳行座標框，支援選區高亮與圖片翻譯</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Proxy">略過系統代理</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Proxy_Description">直接連線服務</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Timeout">逾時（秒）</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Timeout_Description">單次辨識的最長等待時間</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Validate_Description">先檢查 /health，再用 Token 呼叫 /languages</sys:String>
+
+</ResourceDictionary>

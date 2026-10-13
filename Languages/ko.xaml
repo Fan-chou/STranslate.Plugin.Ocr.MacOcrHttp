@@ -1,0 +1,28 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Url">서버 URL</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Url_Description">mac-ocr-http 주소 (예: http://127.0.0.1:8741)</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Token">토큰</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Token_Description">서버 token 파일의 값 (Bearer)</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Languages">인식 언어</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Languages_Description">쉼표로 구분한 Vision 언어 (예: ko-KR,en-US). 비우면 STranslate OCR 언어를 따름</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Level">인식 수준</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Level_Description">accurate는 정확, fast는 빠름</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Script">간체 변환</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Script_Description">비우면 서버 기본값, hans는 간체로 변환, auto는 변환 안 함</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Layout">레이아웃</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Layout_Description">rows(기본) / document(macOS 26 문서 인식)</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Fragments">조각 제거</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Fragments_Description">신뢰도가 낮은 아이콘, 가장자리에서 잘린 글자, 워터마크 제거</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_BoxPoints">좌표 반환</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_BoxPoints_Description">줄 좌표를 반환하여 영역 강조와 이미지 번역 지원</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Proxy">시스템 프록시 우회</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Proxy_Description">서버에 직접 연결</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Timeout">시간 초과(초)</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Timeout_Description">한 번 인식의 최대 대기 시간</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Validate_Description">/health 확인 후 토큰으로 /languages 호출</sys:String>
+
+</ResourceDictionary>

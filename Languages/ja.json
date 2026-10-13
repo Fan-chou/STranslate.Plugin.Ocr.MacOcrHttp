@@ -1,0 +1,4 @@
+{
+  "Name": "MacOcrHttp",
+  "Description": "mac-ocr-http サーバー（Mac の Apple Vision）で OCR。行座標付きで画像翻訳に対応"
+}
