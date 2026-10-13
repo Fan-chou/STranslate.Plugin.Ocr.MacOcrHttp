@@ -57,6 +57,9 @@ dotnet run --project tests/MockCheck   # HTTP 客户端的模拟服务器测试 
 在 Linux/macOS 上也能构建（`EnableWindowsTargeting`）。推送 `v*` 标签后 GitHub Actions 会构建并把 `.spkg` 附加到 Release。
 Builds on Linux/macOS too (`EnableWindowsTargeting`). Pushing a `v*` tag builds the package and attaches it to a GitHub Release.
 
+CI 工作流在 `ci/release.yml`（Windows 构建 + 模拟测试 + 打标签发布）。启用方法：复制到 `.github/workflows/release.yml` 并提交（推送令牌需 `workflow` 权限）。
+The CI workflow is in `ci/release.yml` (Windows build, mock check, release on tag). To enable it, copy it to `.github/workflows/release.yml` and commit (pushing workflows needs a token with `workflow` scope).
+
 ## 说明 / Notes
 
 - Token 以明文保存在 STranslate 的插件设置文件中（与其他插件相同）；请只在可信局域网内使用。

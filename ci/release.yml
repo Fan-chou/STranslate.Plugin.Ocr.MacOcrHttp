@@ -1,0 +1,58 @@
+name: Build and Release
+
+on:
+  push:
+    branches: [ main ]
+    tags: [ 'v*' ]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET 10
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Restore
+        run: dotnet restore STranslate.Plugin.Ocr.MacOcrHttp.csproj
+
+      - name: Build Release (creates .spkg)
+        run: dotnet build STranslate.Plugin.Ocr.MacOcrHttp.csproj -c Release --no-restore
+
+      - name: Mock functional check
+        run: dotnet run --project tests/MockCheck
+
+      - name: Extract version from plugin.json
+        id: version
+        shell: pwsh
+        run: |
+          $json = Get-Content plugin.json | ConvertFrom-Json
+          echo "VERSION=$($json.Version)" >> $env:GITHUB_OUTPUT
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: STranslate.Plugin.Ocr.MacOcrHttp-${{ steps.version.outputs.VERSION }}
+          path: bin/Release/plugins/*.spkg
+
+      - name: Create GitHub Release
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          name: v${{ steps.version.outputs.VERSION }}
+          body: |
+            ## Mac OCR HTTP v${{ steps.version.outputs.VERSION }}
+
+            ### 安装 / Install
+            下载 `.spkg` 文件，在 STranslate「设置 → 插件」中导入插件包，然后在 OCR 服务中添加 MacOcrHttp，填写服务地址和 Token。
+            Download the `.spkg`, import it in STranslate (Settings → Plugins), then add MacOcrHttp as an OCR service and fill in the URL and token.
+          files: bin/Release/plugins/*.spkg
