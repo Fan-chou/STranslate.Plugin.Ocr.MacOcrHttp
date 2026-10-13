@@ -151,5 +151,64 @@ using (var c = new MacOcrClient(Opt()))
 }
 
 listener.Stop();
+// --- Segments: one box per row, never per block (synthetic layout: title, subtitle, tab bar) ---
+OcrLineDto L(string text, double x, double y, double w, double h) => new()
+{
+    Text = text, Confidence = 1, BBox = new OcrBox { X = x, Y = y, Width = w, Height = h },
+    Quad = new OcrQuad
+    {
+        TopLeft = new OcrPoint { X = x, Y = y }, TopRight = new OcrPoint { X = x + w, Y = y },
+        BottomRight = new OcrPoint { X = x + w, Y = y + h }, BottomLeft = new OcrPoint { X = x, Y = y + h },
+    },
+};
+OcrBox B(double x, double y, double w, double h) => new() { X = x, Y = y, Width = w, Height = h };
+var page = new OcrResponseDto
+{
+    Width = 1000, Height = 400,
+    Lines =
+    [
+        L("Hello World", 300, 40, 300, 60),      // 0 title
+        L("示例标题", 330, 120, 220, 40),          // 1 subtitle
+        L("首页", 100, 250, 80, 40),               // 2 tab
+        L("设置中心", 260, 250, 160, 40),          // 3 tab (gap 80 = 2x height)
+        L("帮助", 500, 250, 80, 40),               // 4 tab
+        L("Long sentence one", 100, 330, 400, 40), // 5 same row, small gap (10px)
+        L("continues here", 510, 330, 300, 40),    // 6
+    ],
+    Rows =
+    [
+        new OcrRowDto { Text = "Hello World", BBox = B(300, 40, 300, 60), LineIndices = [0] },
+        new OcrRowDto { Text = "示例标题", BBox = B(330, 120, 220, 40), LineIndices = [1] },
+        new OcrRowDto { Text = "首页 设置中心 帮助", BBox = B(100, 250, 480, 40), LineIndices = [2, 3, 4] },
+        new OcrRowDto { Text = "Long sentence one continues here", BBox = B(100, 330, 710, 40), LineIndices = [5, 6] },
+    ],
+    Blocks =
+    [
+        new OcrBlockDto { BBox = B(300, 40, 300, 120), RowIndices = [0, 1] },
+        new OcrBlockDto { BBox = B(100, 250, 710, 120), RowIndices = [2, 3] },
+    ],
+};
+var seg = MacOcrClient.Segments(page, 0, 0);
+var texts = seg.Select(x => x.Text).ToList();
+Check(texts.Take(2).SequenceEqual(["Hello World", "示例标题"]), "title and subtitle are separate boxes", string.Join(" | ", texts));
+Check(texts.Skip(2).Take(3).SequenceEqual(["首页", "设置中心", "帮助"]), "tab row split at wide gaps", string.Join(" | ", texts));
+Check(texts.Count == 6 && texts[5] == "Long sentence one continues here", "small gap keeps one row", string.Join(" | ", texts));
+Check(seg.All(x => x.Points.Count == 4), "every segment has 4 points");
+Check(seg[0].Points[0] == (300f, 40f) && seg[0].Points[2] == (600f, 100f), "single-line row uses its quad", string.Join(",", seg[0].Points));
+Check(seg[2].Points[0] == (100f, 250f) && seg[2].Points[2] == (180f, 290f), "split tab box = its own line", string.Join(",", seg[2].Points));
+Check(seg[5].Points[0] == (100f, 330f) && seg[5].Points[2] == (810f, 370f), "merged row box = union of its lines", string.Join(",", seg[5].Points));
+var noSplit = MacOcrClient.Segments(page, 0, 0, "row", splitGaps: false).Select(x => x.Text).ToList();
+Check(noSplit.Count == 4 && noSplit[2] == "首页 设置中心 帮助", "splitGaps off keeps the row", string.Join(" | ", noSplit));
+var perLine = MacOcrClient.Segments(page, 0, 0, "line");
+Check(perLine.Count == 7 && perLine[5].Text == "Long sentence one" && perLine[6].Text == "continues here", "line granularity = one per Vision line", string.Join(" | ", perLine.Select(x => x.Text)));
+var perBlock = MacOcrClient.Segments(page, 0, 0, "block");
+Check(perBlock.Count == 2 && perBlock[0].Text == "Hello World\n示例标题", "block granularity joins rows with newlines", string.Join(" | ", perBlock.Select(x => x.Text.Replace("\n", "⏎"))));
+var scaled = MacOcrClient.Segments(page, 500, 200);
+Check(scaled[0].Points[0] == (150f, 20f), "segments scaled to request grid", string.Join(",", scaled[0].Points));
+var linesOnly = new OcrResponseDto { Width = 100, Height = 100, Lines = [L("a", 0, 0, 10, 10), L("b", 0, 20, 10, 10)] };
+Check(MacOcrClient.Segments(linesOnly, 0, 0).Select(x => x.Text).SequenceEqual(["a", "b"]), "no rows -> per line fallback");
+var rowNoLines = new OcrResponseDto { Width = 100, Height = 100, Rows = [new OcrRowDto { Text = "r", BBox = B(1, 2, 3, 4) }] };
+Check(MacOcrClient.Segments(rowNoLines, 0, 0).Single().Points.Count == 4, "row without lineIndices uses row bbox");
+
 Console.WriteLine(failures == 0 ? "ALL PASS" : $"{failures} FAILED");
 return failures == 0 ? 0 : 1;

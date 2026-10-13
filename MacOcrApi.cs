@@ -296,6 +296,104 @@ public sealed class MacOcrClient : IDisposable
     /// Blocks → rows → boxes, in reading order. Boxes are scaled from the server's
     /// pixel grid (response width/height) to the caller's (targetWidth/targetHeight).
     /// </summary>
+    /// <summary>
+    /// Flat reading-order segments, one box each. <paramref name="granularity"/>: "row" (default), "line" or "block".
+    /// In row mode a row made of several Vision lines is split where the horizontal gap between
+    /// neighbouring lines is at least <paramref name="gapFactor"/> × the median line height
+    /// (e.g. three tabs on one bar). A single-line row is never split.
+    /// </summary>
+    public static List<MappedLine> Segments(OcrResponseDto dto, int targetWidth, int targetHeight,
+        string? granularity = "row", bool splitGaps = true, double gapFactor = 1.0)
+    {
+        var sx = dto.Width > 0 && targetWidth > 0 ? (double)targetWidth / dto.Width : 1.0;
+        var sy = dto.Height > 0 && targetHeight > 0 ? (double)targetHeight / dto.Height : 1.0;
+        var mode = (granularity ?? "row").Trim().ToLowerInvariant();
+
+        IReadOnlyList<(float, float)> Rect(OcrBox b) =>
+        [
+            ((float)(b.X * sx), (float)(b.Y * sy)),
+            ((float)((b.X + b.Width) * sx), (float)(b.Y * sy)),
+            ((float)((b.X + b.Width) * sx), (float)((b.Y + b.Height) * sy)),
+            ((float)(b.X * sx), (float)((b.Y + b.Height) * sy)),
+        ];
+        IReadOnlyList<(float, float)> LinePoints(OcrLineDto l)
+        {
+            var q = l.Quad;
+            if (q?.TopLeft != null && q.TopRight != null && q.BottomRight != null && q.BottomLeft != null)
+                return
+                [
+                    ((float)(q.TopLeft.X * sx), (float)(q.TopLeft.Y * sy)),
+                    ((float)(q.TopRight.X * sx), (float)(q.TopRight.Y * sy)),
+                    ((float)(q.BottomRight.X * sx), (float)(q.BottomRight.Y * sy)),
+                    ((float)(q.BottomLeft.X * sx), (float)(q.BottomLeft.Y * sy)),
+                ];
+            return l.BBox != null ? Rect(l.BBox) : [];
+        }
+        IReadOnlyList<(float, float)> Union(IEnumerable<OcrLineDto> ls)
+        {
+            var pts = ls.SelectMany(LinePoints).ToList();
+            if (pts.Count == 0) return [];
+            float x0 = pts.Min(p => p.Item1), y0 = pts.Min(p => p.Item2), x1 = pts.Max(p => p.Item1), y1 = pts.Max(p => p.Item2);
+            return [(x0, y0), (x1, y0), (x1, y1), (x0, y1)];
+        }
+        List<OcrLineDto> Members(OcrRowDto r) =>
+            [.. r.LineIndices.Where(i => i >= 0 && i < dto.Lines.Count).Select(i => dto.Lines[i])
+                .Where(l => !string.IsNullOrWhiteSpace(l.Text))];
+
+        var result = new List<MappedLine>();
+        var rows = dto.Rows.Where(r => !string.IsNullOrWhiteSpace(r.Text)).ToList();
+        var lines = dto.Lines.Where(l => !string.IsNullOrWhiteSpace(l.Text)).ToList();
+
+        if (mode == "block" && dto.Blocks.Count > 0 && rows.Count > 0)
+        {
+            foreach (var b in Map(dto, targetWidth, targetHeight))
+                result.Add(new MappedLine(string.Join("\n", b.Lines.Select(l => l.Text)), b.Points.Count > 0 ? b.Points : b.Lines[0].Points));
+            return result;
+        }
+        if (mode == "line" || rows.Count == 0)
+        {
+            // Lines in reading order: by row order when rows exist, otherwise as sent.
+            var ordered = rows.Count > 0
+                ? rows.SelectMany(r => Members(r).OrderBy(l => l.BBox?.X ?? 0)).Distinct().ToList()
+                : lines;
+            if (ordered.Count == 0) ordered = lines;
+            foreach (var l in ordered) result.Add(new MappedLine(l.Text, LinePoints(l)));
+            return result;
+        }
+
+        var heights = lines.Where(l => l.BBox != null).Select(l => l.BBox!.Height).OrderBy(h => h).ToList();
+        var medianH = heights.Count > 0 ? heights[heights.Count / 2] : 0;
+        foreach (var row in rows)
+        {
+            var members = Members(row).OrderBy(l => l.BBox?.X ?? 0).ToList();
+            if (members.Count == 0)
+            {
+                if (row.BBox != null) result.Add(new MappedLine(row.Text, Rect(row.BBox)));
+                continue;
+            }
+            if (members.Count == 1)
+            {
+                result.Add(new MappedLine(row.Text, LinePoints(members[0])));
+                continue;
+            }
+            var groups = new List<List<OcrLineDto>> { new() { members[0] } };
+            for (var i = 1; i < members.Count; i++)
+            {
+                var prev = groups[^1][^1].BBox; var cur = members[i].BBox;
+                var h = Math.Max(medianH, Math.Max(prev?.Height ?? 0, cur?.Height ?? 0) * 0.5);
+                var gap = prev != null && cur != null ? cur.X - (prev.X + prev.Width) : 0;
+                if (splitGaps && h > 0 && gap >= gapFactor * h) groups.Add([members[i]]);
+                else groups[^1].Add(members[i]);
+            }
+            if (groups.Count == 1)
+                result.Add(new MappedLine(row.Text, Union(members)));
+            else
+                foreach (var g in groups)
+                    result.Add(new MappedLine(string.Join(" ", g.Select(l => l.Text.Trim())), Union(g)));
+        }
+        return result;
+    }
+
     public static List<MappedBlock> Map(OcrResponseDto dto, int targetWidth, int targetHeight)
     {
         var sx = dto.Width > 0 && targetWidth > 0 ? (double)targetWidth / dto.Width : 1.0;

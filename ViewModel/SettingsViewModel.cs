@@ -11,6 +11,7 @@ public partial class SettingsViewModel : ObservableObject, IDisposable
     private readonly Settings _settings;
 
     public IReadOnlyList<string> Levels { get; } = ["accurate", "fast"];
+    public IReadOnlyList<string> Granularities { get; } = ["row", "line", "block"];
     public IReadOnlyList<string> Scripts { get; } = ["", "hans", "auto"];
     public IReadOnlyList<string> Layouts { get; } = ["rows", "document"];
 
@@ -27,6 +28,8 @@ public partial class SettingsViewModel : ObservableObject, IDisposable
         Layout = _settings.Layout;
         DropFragments = _settings.DropFragments;
         UseBoxPoints = _settings.UseBoxPoints;
+        Granularity = _settings.Granularity;
+        SplitGaps = _settings.SplitGaps;
         BypassProxy = _settings.BypassProxy;
         TimeoutSeconds = _settings.TimeoutSeconds;
 
@@ -45,6 +48,8 @@ public partial class SettingsViewModel : ObservableObject, IDisposable
             case nameof(Layout): _settings.Layout = Layout ?? "rows"; break;
             case nameof(DropFragments): _settings.DropFragments = DropFragments; break;
             case nameof(UseBoxPoints): _settings.UseBoxPoints = UseBoxPoints; break;
+            case nameof(Granularity): _settings.Granularity = Granularity ?? "row"; break;
+            case nameof(SplitGaps): _settings.SplitGaps = SplitGaps; break;
             case nameof(BypassProxy): _settings.BypassProxy = BypassProxy; break;
             case nameof(TimeoutSeconds): _settings.TimeoutSeconds = Math.Clamp(TimeoutSeconds, 5, 600); break;
             default: return;
@@ -61,6 +66,8 @@ public partial class SettingsViewModel : ObservableObject, IDisposable
     [ObservableProperty] public partial string? Layout { get; set; }
     [ObservableProperty] public partial bool DropFragments { get; set; }
     [ObservableProperty] public partial bool UseBoxPoints { get; set; }
+    [ObservableProperty] public partial string? Granularity { get; set; }
+    [ObservableProperty] public partial bool SplitGaps { get; set; }
     [ObservableProperty] public partial bool BypassProxy { get; set; }
     [ObservableProperty] public partial int TimeoutSeconds { get; set; }
 

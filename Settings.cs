@@ -26,6 +26,12 @@ public class Settings
     /// <summary>Return line boxes so STranslate can highlight and translate regions.</summary>
     public bool UseBoxPoints { get; set; } = true;
 
+    /// <summary>Box granularity: row (default), line, or block.</summary>
+    public string Granularity { get; set; } = "row";
+
+    /// <summary>Row mode: split a row made of several Vision lines at wide horizontal gaps (e.g. tabs).</summary>
+    public bool SplitGaps { get; set; } = true;
+
     /// <summary>Ignore the system proxy for this server.</summary>
     public bool BypassProxy { get; set; } = true;
 

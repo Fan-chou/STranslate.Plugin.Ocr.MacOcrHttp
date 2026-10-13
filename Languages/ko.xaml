@@ -25,4 +25,9 @@
     <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Timeout_Description">한 번 인식의 최대 대기 시간</sys:String>
     <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Validate_Description">/health 확인 후 토큰으로 /languages 호출</sys:String>
 
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Granularity">상자 단위</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Granularity_Description">row: 행마다 (기본); line: Vision 줄마다; block: 문단마다</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_SplitGaps">넓은 간격 분할</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_SplitGaps_Description">행 안의 넓은 간격(탭 바 등)에서 상자를 나눔</sys:String>
+
 </ResourceDictionary>

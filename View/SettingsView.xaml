@@ -74,6 +74,20 @@
             <ui:ToggleSwitch IsOn="{Binding UseBoxPoints}" />
         </ui:SettingsCard>
 
+        <ui:SettingsCard Description="{DynamicResource STranslate_Plugin_Ocr_MacOcrHttp_Granularity_Description}" Header="{DynamicResource STranslate_Plugin_Ocr_MacOcrHttp_Granularity}">
+            <ui:SettingsCard.HeaderIcon>
+                <ui:FontIcon Icon="{x:Static ui:FluentSystemIcons.TextAlignLeft_24_Regular}" />
+            </ui:SettingsCard.HeaderIcon>
+            <ComboBox MinWidth="160" ItemsSource="{Binding Granularities}" SelectedItem="{Binding Granularity, Mode=TwoWay}" />
+        </ui:SettingsCard>
+
+        <ui:SettingsCard Description="{DynamicResource STranslate_Plugin_Ocr_MacOcrHttp_SplitGaps_Description}" Header="{DynamicResource STranslate_Plugin_Ocr_MacOcrHttp_SplitGaps}">
+            <ui:SettingsCard.HeaderIcon>
+                <ui:FontIcon Icon="{x:Static ui:FluentSystemIcons.ScanText_24_Regular}" />
+            </ui:SettingsCard.HeaderIcon>
+            <ui:ToggleSwitch IsOn="{Binding SplitGaps}" />
+        </ui:SettingsCard>
+
         <ui:SettingsCard Description="{DynamicResource STranslate_Plugin_Ocr_MacOcrHttp_Proxy_Description}" Header="{DynamicResource STranslate_Plugin_Ocr_MacOcrHttp_Proxy}">
             <ui:SettingsCard.HeaderIcon>
                 <ui:FontIcon Icon="{x:Static ui:FluentSystemIcons.Shield_24_Regular}" />

@@ -3,7 +3,7 @@
   "Name": "MacOcrHttp",
   "Description": "调用 macOS Vision 的 mac-ocr-http 服务进行 OCR，返回行坐标，支持图片翻译",
   "Author": "Fan-chou",
-  "Version": "0.1.0",
+  "Version": "0.1.1",
   "Website": "https://github.com/Fan-chou/STranslate.Plugin.Ocr.MacOcrHttp",
   "ExecuteFileName": "STranslate.Plugin.Ocr.MacOcrHttp.dll",
   "IconPath": "icon.png"

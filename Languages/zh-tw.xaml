@@ -25,4 +25,9 @@
     <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Timeout_Description">單次辨識的最長等待時間</sys:String>
     <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Validate_Description">先檢查 /health，再用 Token 呼叫 /languages</sys:String>
 
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Granularity">框粒度</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Granularity_Description">row：每行一個框（預設）；line：每個辨識行一個框；block：每個段落一個框</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_SplitGaps">依空隙拆分</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_SplitGaps_Description">行內間距很大的多段文字（如標籤列）拆成多個框</sys:String>
+
 </ResourceDictionary>

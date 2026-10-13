@@ -44,6 +44,8 @@ An OCR plugin for [STranslate](https://github.com/STranslate/STranslate) that se
 | 版面 / Layout | `rows` | `document` 需 macOS 26 / needs macOS 26 |
 | 过滤碎片 / Drop fragments | 开 / on | 对应 `fragments=drop|keep` |
 | 返回坐标 / Line boxes | 开 / on | 关闭后只返回纯文本 / off returns plain text only |
+| 框粒度 / Box granularity | `row` | `row` 每行一个框；`line` 每个 Vision 行一个框；`block` 每段一个框（段内按行换行）/ one box per row, per Vision line, or per paragraph |
+| 按空隙拆分 / Split wide gaps | 开 / on | `row` 模式下，由多个 Vision 行组成的行在大间距处拆开（如标签栏）；单个 Vision 行不拆 / splits multi-line rows at gaps ≥ 1× median line height |
 | 绕过系统代理 / Bypass proxy | 开 / on | 避免代理软件拦截局域网请求 / keeps a proxy from intercepting LAN calls |
 | 超时 / Timeout | 60 s | 5–600 |
 
@@ -66,6 +68,12 @@ The CI workflow is in `ci/release.yml` (Windows build, mock check, release on ta
   The token is stored in STranslate's plugin settings like other plugins' API keys; use it on a trusted LAN.
 - mac-ocr-http 的 `/health` 不需要认证；验证按钮另用 `/languages` 检查 Token。
   `/health` is unauthenticated; Validate also calls `/languages` to check the token.
+
+## 更新日志 / Changelog
+
+- **0.1.1**：每行一个文本框（不再按段落合并），多行之间用换行分隔；标签栏等宽间距行拆分；新增「框粒度」「按空隙拆分」设置。
+  One box per row instead of per block, rows separated by newlines; wide-gap rows (tab bars) split; new granularity and split settings.
+- **0.1.0**：首个版本 / first release.
 
 ## License
 

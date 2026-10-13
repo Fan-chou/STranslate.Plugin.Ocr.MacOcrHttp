@@ -54,26 +54,24 @@ public partial class Main : ObservableObject, IOcrPlugin
         {
             using var client = new MacOcrClient(options);
             var dto = await client.RecognizeAsync(request.ImageData, languages, cancellationToken);
-            var blocks = MacOcrClient.Map(dto, request.PixelWidth, request.PixelHeight);
-            if (blocks.Count == 0) return new OcrResult().Fail("未检测到文字 / No text found");
+            var segments = MacOcrClient.Segments(dto, request.PixelWidth, request.PixelHeight, Settings.Granularity, Settings.SplitGaps);
+            if (segments.Count == 0) return new OcrResult().Fail("未检测到文字 / No text found");
 
             var result = new OcrResult();
-            if (Settings.UseBoxPoints)
+            foreach (var segment in segments)
             {
-                foreach (var block in blocks)
+                // One region → one paragraph → one line per segment, so STranslate draws a box per row
+                // and never concatenates two rows without a separator.
+                if (Settings.UseBoxPoints && segment.Points.Count == 4)
                 {
-                    var paragraph = new OcrParagraph { BoxPoints = Points(block.Points) };
-                    foreach (var line in block.Lines)
-                        paragraph.Lines.Add(new OcrContent { Text = line.Text, BoxPoints = Points(line.Points) });
-                    var region = new OcrRegion { BoxPoints = Points(block.Points) };
+                    var points = Points(segment.Points);
+                    var paragraph = new OcrParagraph { BoxPoints = points };
+                    paragraph.Lines.Add(new OcrContent { Text = segment.Text, BoxPoints = points });
+                    var region = new OcrRegion { BoxPoints = points };
                     region.Paragraphs.Add(paragraph);
                     result.Regions.Add(region);
                 }
-            }
-            else
-            {
-                foreach (var line in blocks.SelectMany(b => b.Lines))
-                    result.OcrContents.Add(new OcrContent { Text = line.Text });
+                result.OcrContents.Add(new OcrContent { Text = segment.Text, BoxPoints = Settings.UseBoxPoints ? Points(segment.Points) : [] });
             }
             return result;
         }

@@ -25,4 +25,9 @@
     <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Timeout_Description">1 回の認識の最大待ち時間</sys:String>
     <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Validate_Description">/health を確認し、トークンで /languages を呼び出します</sys:String>
 
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Granularity">ボックス単位</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Granularity_Description">row：行ごと（既定）；line：Vision の行ごと；block：段落ごと</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_SplitGaps">広い間隔で分割</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_SplitGaps_Description">行内の広い間隔（タブバーなど）で別のボックスに分割</sys:String>
+
 </ResourceDictionary>

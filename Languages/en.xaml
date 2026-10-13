@@ -25,4 +25,9 @@
     <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Timeout_Description">Maximum wait for one recognition</sys:String>
     <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Validate_Description">Checks /health, then calls /languages with the token</sys:String>
 
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Granularity">Box granularity</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Granularity_Description">row: one box per row (default); line: one per Vision line; block: one per paragraph</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_SplitGaps">Split wide gaps</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_SplitGaps_Description">Split a row into separate boxes at wide horizontal gaps (e.g. tab bars)</sys:String>
+
 </ResourceDictionary>
