@@ -436,3 +436,18 @@ public sealed class MacOcrClient : IDisposable
         return blocks;
     }
 }
+
+public static class ScriptDefaults
+{
+    /// <summary>
+    /// Script mode to send when the user left the Script setting empty: keep
+    /// Traditional text ("auto") when the recognition languages put zh-Hant
+    /// first, otherwise let the server decide (Simplified by default).
+    /// </summary>
+    public static string ScriptFor(string configured, IReadOnlyList<string> languages)
+    {
+        if (!string.IsNullOrWhiteSpace(configured)) return configured.Trim();
+        var first = languages.Count > 0 ? languages[0] : string.Empty;
+        return first.StartsWith("zh-Hant", StringComparison.OrdinalIgnoreCase) ? "auto" : string.Empty;
+    }
+}

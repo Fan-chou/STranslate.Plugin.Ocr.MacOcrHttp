@@ -17,7 +17,7 @@ public static class LanguageMap
         LangEnum.PortuguesePortugal or LangEnum.PortugueseBrazil => ["pt-BR"],
         LangEnum.Russian => ["ru-RU"],
         LangEnum.Ukrainian => ["uk-UA"],
-        LangEnum.Vietnamese => ["vi-VT"],
+        LangEnum.Vietnamese => ["vi-VN"],
         LangEnum.Thai => ["th-TH"],
         LangEnum.Arabic => ["ar-SA"],
         _ => [],

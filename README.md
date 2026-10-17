@@ -71,6 +71,7 @@ CI: `.github/workflows/release.yml` builds on Windows and runs the mock check on
 
 ## 更新日志 / Changelog
 
+- **0.1.2**：「简繁转换」留空时自动：OCR 语言为繁体中文/粤语（或语言列表首选 zh-Hant）时保留繁体（script=auto），否则沿用服务端默认；修正越南语代码 vi-VN。 / Script left empty now keeps Traditional when the OCR language is Traditional Chinese/Cantonese or zh-Hant is listed first; Vietnamese code fixed to vi-VN.
 - **0.1.1**：每行一个文本框（不再按段落合并），多行之间用换行分隔；标签栏等宽间距行拆分；新增「框粒度」「按空隙拆分」设置。
   One box per row instead of per block, rows separated by newlines; wide-gap rows (tab bars) split; new granularity and split settings.
 - **0.1.0**：首个版本 / first release.

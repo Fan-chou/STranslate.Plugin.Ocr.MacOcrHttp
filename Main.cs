@@ -52,6 +52,7 @@ public partial class Main : ObservableObject, IOcrPlugin
         var languages = options.Languages.Count > 0 ? options.Languages : LanguageMap.ForVision(request.Language);
         try
         {
+            options = options with { Script = ScriptDefaults.ScriptFor(options.Script, languages) };
             using var client = new MacOcrClient(options);
             var dto = await client.RecognizeAsync(request.ImageData, languages, cancellationToken);
             var segments = MacOcrClient.Segments(dto, request.PixelWidth, request.PixelHeight, Settings.Granularity, Settings.SplitGaps);

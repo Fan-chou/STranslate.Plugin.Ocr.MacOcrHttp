@@ -12,7 +12,7 @@
     <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Level">認識レベル</sys:String>
     <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Level_Description">accurate は高精度、fast は高速</sys:String>
     <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Script">簡体字変換</sys:String>
-    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Script_Description">空欄はサーバー既定、hans は簡体字へ変換、auto は変換しない</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Script_Description">空欄は自動（OCR 言語が繁体字中国語/広東語、または zh-Hant が先頭なら繁体字を保持、それ以外はサーバー既定）；hans は簡体字へ変換；auto は繁体字を保持</sys:String>
     <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Layout">レイアウト</sys:String>
     <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Layout_Description">rows（既定）／document（macOS 26 文書認識）</sys:String>
     <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Fragments">断片を除去</sys:String>

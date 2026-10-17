@@ -87,7 +87,12 @@ using (var c = new MacOcrClient(Opt(token: "wrong")))
 }
 using (var c = new MacOcrClient(Opt(token: "Bearer " + Token))) { var s = await c.ValidateAsync(default); Check(s.StartsWith("OK"), "token with 'Bearer ' prefix accepted"); }
 
-// Recognize + body
+// Script defaults: keep Traditional when zh-Hant leads; explicit setting wins
+Check(ScriptDefaults.ScriptFor("", ["zh-Hant", "en-US"]) == "auto", "zh-Hant first keeps Traditional (script auto)");
+Check(ScriptDefaults.ScriptFor("", ["zh-Hans", "en-US"]) == "", "zh-Hans first uses server default");
+Check(ScriptDefaults.ScriptFor("", []) == "", "no languages uses server default");
+Check(ScriptDefaults.ScriptFor("hans", ["zh-Hant", "en-US"]) == "hans", "explicit script wins");
+
 using (var c = new MacOcrClient(Opt() with { Languages = ["zh-Hans", "en-US"], Script = "hans", DropFragments = false }))
 {
     var dto = await c.RecognizeAsync(small, null, default);

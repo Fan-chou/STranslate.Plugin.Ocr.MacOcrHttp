@@ -12,7 +12,7 @@
     <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Level">인식 수준</sys:String>
     <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Level_Description">accurate는 정확, fast는 빠름</sys:String>
     <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Script">간체 변환</sys:String>
-    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Script_Description">비우면 서버 기본값, hans는 간체로 변환, auto는 변환 안 함</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Script_Description">비우면 자동(OCR 언어가 번체 중국어/광둥어이거나 zh-Hant가 첫 번째이면 번체 유지, 그 외 서버 기본값); hans는 간체로 변환; auto는 번체 유지</sys:String>
     <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Layout">레이아웃</sys:String>
     <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Layout_Description">rows(기본) / document(macOS 26 문서 인식)</sys:String>
     <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Fragments">조각 제거</sys:String>

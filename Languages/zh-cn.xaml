@@ -12,7 +12,7 @@
     <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Level">识别级别</sys:String>
     <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Level_Description">accurate 更准；fast 更快但不支持中文</sys:String>
     <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Script">简繁转换</sys:String>
-    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Script_Description">留空为服务端默认；hans 繁体转简体；auto 不转换</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Script_Description">留空为自动（OCR 语言为繁体中文/粤语或首选 zh-Hant 时保留繁体，否则用服务端默认）；hans 繁体转简体；auto 保留繁体</sys:String>
     <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Layout">版面模式</sys:String>
     <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Layout_Description">rows 为默认（推荐）；document 使用 macOS 26 文档识别</sys:String>
     <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Fragments">过滤碎片</sys:String>

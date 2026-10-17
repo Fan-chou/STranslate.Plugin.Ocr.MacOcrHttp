@@ -12,7 +12,7 @@
     <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Level">Level</sys:String>
     <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Level_Description">accurate is better; fast is quicker but has no Chinese</sys:String>
     <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Script">Script</sys:String>
-    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Script_Description">Empty: server default; hans converts Traditional to Simplified; auto leaves text as is</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Script_Description">Empty: automatic (keeps Traditional when the OCR language is Traditional Chinese/Cantonese or zh-Hant is listed first, otherwise server default); hans: convert to Simplified; auto: keep Traditional as recognized</sys:String>
     <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Layout">Layout</sys:String>
     <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Layout_Description">rows (default, recommended); document uses the macOS 26 document recognizer</sys:String>
     <sys:String x:Key="STranslate_Plugin_Ocr_MacOcrHttp_Fragments">Drop fragments</sys:String>
